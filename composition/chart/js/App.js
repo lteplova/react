@@ -104,11 +104,12 @@ const Legend = props => {
 	);
 };
 
-const propsCharts = {	
+const propsCharts = {
 	data: [],
 	series: ['France', 'Italy', 'England', 'Sweden', 'Germany'],
 	labels: ['cats', 'dogs', 'horses', 'ducks', 'cows'],
-	colors: ['#43A19E', '#7B43A1', '#F2317A', '#FF9824', '#58CF6C']};
+	colors: ['#43A19E', '#7B43A1', '#F2317A', '#FF9824', '#58CF6C'],
+};
 
 class App extends React.Component {
 	componentWillMount() {
