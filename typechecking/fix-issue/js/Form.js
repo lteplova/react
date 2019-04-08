@@ -1,6 +1,7 @@
 'use strict';
 
 const Form = (props) => {
+  console.log(props);
   return (
     <div className="col-md-5 offset-md-4">
       <h1 className="text-center">Обновления профиля</h1>
@@ -42,14 +43,22 @@ const Form = (props) => {
   )
 };
 
+
+const  emailPropType = (props, propName, componentName) => {
+  let email = props[propName];
+  let isEmail=(typeof email ==='string')&&/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
+  if(!isEmail) { 
+    return newError(`Неверный параметр ${propName} в компоненте${componentName}: параметр должен быть адресом электронной почты`);}
+    return null;
+  }
+
 Form.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
-
-  email: PropTypes.number,
+  email: emailPropType,
   first_name: PropTypes.string,
   last_name: PropTypes.string,
-  age: PropTypes.integer,
+  age: PropTypes.number,
   nickname: PropTypes.string,
-  is_married: PropTypes.integer
+  is_married: PropTypes.bool
 };

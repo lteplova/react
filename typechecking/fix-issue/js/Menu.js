@@ -1,6 +1,7 @@
 'use strict';
 
 const Menu = (props) => {
+  console.log(props);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">{props.title}{' '}
@@ -22,17 +23,18 @@ const Menu = (props) => {
   )
 };
 
-Menu.propTypes = {
-  handleSearch: PropTypes.func,
+const versionPropType = (props, propName, componentName) => {
+  if (/^[0-9]{1,2}\.[0-9]{1,2}$/.test(props[propName])) {
+    return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expecting something like 'xx.xx'. Validation failed.`);
+  }
+}
 
+Menu.propTypes = {
+  handleSearch: PropTypes.string,
   title: PropTypes.string,
-  version: (props, propName, componentName) => {
-    if (!/^[0-9]{1,2}\.[0-9]{1,2}$/.test(props[propName])) {
-      return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expecting something like 'xx.xx'. Validation failed.`);
-    }
-  },
-  items: PropTypes.arrayOf(PropTypes.shape({
+  version: versionPropType,
+  items: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired
-  })),
+  })
 };
