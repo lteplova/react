@@ -33,7 +33,21 @@ class App extends React.Component {
 
   onChange(e) {
     const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    let value = null;
+    
+    switch(target.type) {
+      case 'checkbox':
+      value = target.checked;
+      break;
+
+      case 'number':
+      value = +target.value;
+      break;
+
+      default:
+      value = target.value;
+    }
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -42,11 +56,11 @@ class App extends React.Component {
   }
 
   render() {
-    const menuItems = ['Google', 'https://google.com', 'Яндекс', 'https://yandex.ru'];
+    const menuItems = [{name: 'Google', url: 'https://google.com'}, {name: 'Яндекс', url: 'https://yandex.ru'}];
 
     return (
       <React.Fragment>
-        <Menu handleSearch={'this.onSearch'} title={'Приложение'} version={'1.3.23'} items={[menuItems]}/>
+        <Menu handleSearch={this.onSearch} title={'Приложение'} version={'1.3.23'} items={menuItems}/>
         <div className="row">
           <Form {...this.state} handleChange={this.onChange} handleSubmit={this.onSubmit}/>
         </div>

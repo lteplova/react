@@ -1,7 +1,6 @@
 'use strict';
 
 const Menu = (props) => {
-  console.log(props);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">{props.title}{' '}
@@ -9,8 +8,8 @@ const Menu = (props) => {
       </a>
 
       <ul className="navbar-nav mr-auto">
-        {props.items.map(({name, url}) => (
-          <li key={name} className="nav-item">
+        {props.items.map(({name, url}, index) => (
+          <li key={index} className="nav-item">
             <a className="nav-link" href={url}>{name}</a>
           </li>
         ))}
@@ -23,18 +22,17 @@ const Menu = (props) => {
   )
 };
 
-const versionPropType = (props, propName, componentName) => {
-  if (/^[0-9]{1,2}\.[0-9]{1,2}$/.test(props[propName])) {
-    return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expecting something like 'xx.xx'. Validation failed.`);
-  }
-}
-
 Menu.propTypes = {
-  handleSearch: PropTypes.string,
+  handleSearch: PropTypes.func,
+
   title: PropTypes.string,
-  version: versionPropType,
-  items: PropTypes.shape({
+  version: (props, propName, componentName) => {
+    if (/^[0-9]{1,2}\.[0-9]{1,2}$/.test(props[propName])) {
+      return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expecting something like 'xx.xx'. Validation failed.`);
+    }
+  },
+  items: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired
-  })
+  })),
 };
