@@ -1,7 +1,6 @@
 'use strict';
 
 const DateInput = props => {
-	console.log(props);
 	return (
 		<div className="form-group">
 			<label>{props.label}</label>
@@ -18,30 +17,31 @@ const DateInput = props => {
 	);
 };
 
+const birthdayPropType = (props, propName, componentName) => {
+	const value = props[propName];
+	const isValid = typeof value === 'string' && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value);
+	if (!!value.length && !isValid) {
+		return new Error(
+			`Неверный параметр ${propName} в компоненте ${componentName}: параметр должен быть датой`
+		);
+	}
+	return null;
+};
+
 DateInput.propTypes = {
 	handleChange: PropTypes.func,
-
-	label: PropTypes.oneOf(["День Рождения"]),
+	label: PropTypes.string,
 	name: PropTypes.string,
-	value: PropTypes.string,
+	value: birthdayPropType
 };
+
+const date = new Date();
+const month = ((date.getMonth()+1) <= 9 ) ?  "0" + (date.getMonth()+1) : date.getMonth()+1 
+const day = ((date.getDate() <= 9)) ? "0" + date.getDate(): date.getDate();
+const today = `${date.getFullYear()}-${month}-${day}`;
 
 DateInput.defaultProps = {
   label: "День Рождения",
   name:  "birthday",
-  //handleChange: new Date (year, month, date),
-  //value: new Date (year, month, date),
-
+  value: today
 };
-
-// let data = new Date ();
-// //data1 =  getTime(data);
-// console.log(data);
-
-let date = new Date;
-let year = date.getFullYear();
-let month = ((date.getMonth()+1) <= 9 ) ?  "0" + (date.getMonth()+1) : date.getMonth()+1 
-let day = ((date.getDate() <= 9)) ? "0" + date.getDate(): date.getDate();
-//let today = year + "-" month + "-" day;
-
-  console.log(today);
