@@ -1,6 +1,7 @@
 'use strict';
 
 const TextInput = props => {
+ // console.log(props);
   return (
     <div className="form-group">
       <label>{props.label}</label>
@@ -9,3 +10,15 @@ const TextInput = props => {
     </div>
   )
 };
+
+TextInput.propTypes = {
+ label:  PropTypes.oneOf(
+  ['Email', 'Имя', 'Фамилия', 'Пароль', 'Пол']
+  ),
+ type: PropTypes.string,
+ name: PropTypes.string,
+ handleChange: PropTypes.func,
+ value:PropTypes.string,
+ required: PropTypes.bool
+}
+

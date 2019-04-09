@@ -127,13 +127,13 @@ Form.propTypes = {
 	email: emailValidator.isRequired,
 	first_name: PropTypes.string,
 	last_name: PropTypes.string,
-  age: ageValidator.isRequired,
-  nickname: PropTypes.string,
+    age: ageValidator.isRequired,
+    nickname: PropTypes.string,
 	is_married: PropTypes.bool
 };
 
 Form.defaultProps = {
-	email: 'roman@gmail.com',
+  email: 'roman@gmail.com',
   first_name: 'Роман',
   last_name: 'Петров',
   age: 30,
