@@ -27,3 +27,39 @@ const Profile = props => {
     </div>
   );
 };
+
+const bithValidator = (props, propName, componentName) => {
+	const value = props[propName];
+	const isValid = typeof value === 'string' && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) && new Date(value).getTime() < new Date().getTime();
+	if (!isValid) {
+		return new Error(
+			`Неверный параметр ${propName} в компоненте ${componentName}: параметр должен быть датой и меньше текущей`
+		);
+	}
+	return null;
+};
+
+const urlValidator = (props, propName, componentName) => {
+	const value = props[propName];
+	const isValid = typeof value === 'string' && /^https:\/\/vk.com\/(id[0-9]+|[A-Za-z0-9_-]+)$/.test(value);
+	if (!isValid) {
+		return new Error(
+			`Неверный параметр ${propName} в компоненте ${componentName}: параметр должен быть http*`
+		);
+	}
+	return null;
+};
+
+
+Profile.propTypes = {
+  url: urlValidator,
+  birthday: bithValidator,
+  firs_name: PropTypes.string,
+  last_name: PropTypes.string
+}
+
+Profile.defaultProps = {
+img: './images/profile.jpg',
+birthday: '1980-06-03'
+
+}
