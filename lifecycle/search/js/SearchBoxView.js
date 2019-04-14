@@ -1,5 +1,5 @@
-const SearchBoxView = ({ fixed }) => (
-  <section className="container">
+const SearchBoxView = ({ refProp, fixed }) => (
+  <section className="container" ref={refProp}>
     <div className="row">
       <div className="col-sm-12">
         <input
