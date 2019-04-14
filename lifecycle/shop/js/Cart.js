@@ -3,12 +3,10 @@ class Cart extends React.Component {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     if (nextProps.isOpen || this.props.isOpen) return true;
-    if (this.props.items != nextProps.items && !nextProps.isOpen) {
-      return false;
-    }
-    return true;
+    if (nextProps.items  != this.props.items && nextProps.isOpen) return true;
+    return false;
   }
 
   render() {
