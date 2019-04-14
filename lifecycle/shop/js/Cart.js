@@ -4,7 +4,7 @@ class Cart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.clearCart || nextProps.toggleCart) return true;
+    if (nextProps.isOpen || this.props.isOpen) return true;
     if (this.props.items != nextProps.items && !nextProps.isOpen) {
       return false;
     }
