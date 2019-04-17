@@ -9,21 +9,22 @@ function DateTimePretty(DateTime) {
             };
         }
         
-        componentWillMount() {
-            const date = new Date(this.state.date).getTime() / 1000;
-            const now = Date.now() / 1000;
+        componentDidMount() {
+            const date = new Date(this.state.date).getTime()/1000; //кол-во секунд
+            const now = Date.now()/1000; //кол-во секунд с 01-01-1970
             const diff = now - date;
+            console.log(diff);
             let prettyTime = null;
 
             if (diff <= 3600 && diff > 0) {
-                console.log('less hour', now, date);
-                prettyTime = `${new Date(diff * 1000).getMinutes()} минут назад`;
+                console.log('less hour', now, date, diff);
+                prettyTime = `${Math.floor(diff / 60)} минут назад`;
             } else if (diff > 3600 && diff < 3600 * 24) {
                 console.log('less day, but more hour', now, date);
-                prettyTime = `${new Date(diff * 1000).getHours()} часов назад`;
+                prettyTime = `${Math.floor(diff / 60 / 60)} часов назад`;
             } else if (diff >= 3600 * 24) {
                 console.log('more day', now, date);
-                prettyTime = `${new Date(diff * 1000).getDate()} дней назад`;
+                prettyTime = `${Math.floor(diff / 60 / 60 / 24)} дней назад`;
             } else {
                 console.log('future', now, date);
             }
@@ -50,3 +51,5 @@ const Video = props => {
         </div>
     )
 };
+
+
