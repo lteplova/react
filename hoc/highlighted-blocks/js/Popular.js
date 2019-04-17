@@ -1,18 +1,10 @@
 'use strict';
 
-function Popular(Article, Videos) {
-	return class extends React.Component {
-		constructor(props) {
-			super(props);
-			this.state = {
-				date: props.date,
-			};
-		}
-
-		
-		render() {
-			return 
-            <Article {...this.state} />
-            }
-	};
-}
+const Popular = props => {
+    return (
+        <div className="wrap-item wrap-item-popular">
+        <span className="label">Popular!</span>
+        {props.children}
+        </div>
+    )
+};
