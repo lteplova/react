@@ -1,5 +1,21 @@
 'use strict';
 
+function FormatComponent (Component) {
+    return class extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+             return <Component list={this.props.list}/>
+        }
+    }
+}
+
+const FormatMonth = FormatComponent(MonthTable);
+const FormatYear = FormatComponent(YearTable, SortTable);
+const FormatSort = FormatComponent(SortTable);
+
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -17,9 +33,9 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <MonthTable list={this.state.list} />
-                <YearTable list={this.state.list} />
-                <SortTable list={this.state.list} />
+                <FormatMonth list={this.state.list} />
+                <FormatYear list={this.state.list} />
+                <FormatSort list={this.state.list} />
             </div>
         );
     }
