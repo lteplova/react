@@ -12,7 +12,7 @@ function FormatComponent (Component) {
 }
 
 const FormatMonth = FormatComponent(MonthTable);
-const FormatYear = FormatComponent(YearTable, SortTable);
+const FormatYear = FormatComponent(YearTable);
 const FormatSort = FormatComponent(SortTable);
 
 
@@ -20,21 +20,50 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: []
+            list: [],
+            years: [],
+            months: []
         };
     }
 
+    sum(list, key) {
+        const newList = [];
+        for (let obj of list) {
+          if (newList.some(item => item[key] === obj[key])) {
+            let foundIndex = newList.findIndex(item => item[key] === obj[key]);
+            newList[foundIndex].amount += obj.amount;
+          } else {
+            newList.push({[key]: obj[key], amount: obj.amount});
+          }
+        }
+        return newList; 
+      }
+
     componentDidMount() {
         axios.get('https://api.myjson.com/bins/l2s9l').then(response => {
-            this.setState(response.data);
+            const list = response.data.list.map(item => {
+                let fullDate = new Date(item.date);
+                item.month = fullDate.toLocaleString('En-Us', { month: "short" });
+                item.year = fullDate.getFullYear();
+                return item;
+            }).sort((a, b) => {
+                if (a.date > b.date) return 1;
+                if (a.date < b.date) return -1;
+                return 0;
+            });
+            
+            const years = this.sum(list, 'year');
+            const months = this.sum(list, 'month');
+            this.setState({ list, years, months });
         });
+        
     }
 
     render() {
         return (
             <div id="app">
-                <FormatMonth list={this.state.list} />
-                <FormatYear list={this.state.list} />
+                <FormatMonth list={this.state.months} />
+                <FormatYear list={this.state.years} />
                 <FormatSort list={this.state.list} />
             </div>
         );
