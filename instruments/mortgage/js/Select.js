@@ -8,3 +8,4 @@ const Autocomplete = () => (
     </select>
    </div>
 );
+
