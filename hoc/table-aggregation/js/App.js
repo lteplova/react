@@ -4,7 +4,18 @@ function FormatComponent (Component) {
     return class extends React.Component {
         constructor(props) {
             super(props);
+           // console.log('FFF', this.props);
         }
+        
+        sort = (list, dataArray) => {
+            dataArray.reduce( (item) => {
+            return console.log('AAA', list, item.date);
+            }
+            )
+        }
+
+        //sort(props);
+
         render() {
              return <Component list={this.props.list}/>
         }
