@@ -1,17 +1,40 @@
+const { Input, InputNumber, Form } = antd;
+
+function onChange(value) {
+  console.log("changed", value);
+}
+
 const Inputs = () => (
   <div>
-    <label>
-      Стоимость: <input type="number" name="price" value="2000000"/> руб.
-    </label>
-    <br/>
-    <label>
-      На руках:
-      <input type="number" name="money" value="200000"/> руб.
-    </label>
-    <br/>
-    <label>
-      Срок кредита:
-      <input type="number" name="duration" value="5"/> лет.
-    </label>
+   <Form.Item label="Стоимость:">
+      <InputNumber
+        defaultValue="2000000"
+        min={1000000}
+        max={10000000}
+        step={100}
+        onChange={onChange}
+      />
+    </Form.Item>
+
+    <Form.Item label="На руках:">
+      <InputNumber
+        defaultValue="2000000"
+        min={1000000}
+        max={10000000}
+        step={100}
+        onChange={onChange}
+      />
+    </Form.Item>
+
+    <Form.Item label="Срок кредита:">
+      <InputNumber
+        defaultValue="5"
+        min={3}
+        max={25}
+        step={1}
+        onChange={onChange}
+      />{" "}
+      лет
+    </Form.Item>
   </div>
 );

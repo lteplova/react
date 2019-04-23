@@ -1,9 +1,20 @@
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 5 }
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 12 }
+  }
+};
+
 const MortgateCalculator = () => (
   <div>
-    <form action="">
+    <Form {...formItemLayout}>
       <Autocomplete/>
       <Inputs/>
-      <Button/>
-    </form>
+      <ButtonEl/>
+    </Form>
   </div>
 );
