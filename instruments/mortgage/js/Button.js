@@ -1,13 +1,9 @@
-// const Button = () => (
-//   <button>Отправить</button>
-// );
 
-
-const {Button} = antd;
-
+const { Button, Form } = antd;
 const ButtonEl = () => (
-  <div>
-<Button type="primary">Отправить</Button>
- </div>,
-mountNode
+<Form.Item wrapperCol={{ span: 24, offset: 5 }}>
+      <Button type="primary" htmlType="submit">
+        Отправить
+      </Button>
+</Form.Item>
 );
