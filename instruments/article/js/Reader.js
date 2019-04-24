@@ -23,8 +23,9 @@ class Reader extends React.Component {
 
   turnThePage() {
     const total = this.state.pages.length;
-
-    this.setState({ currentPage: total })
+    
+    this.setState({ currentPage: total})
+    console.log(this.state.pages)
   }
 }
 

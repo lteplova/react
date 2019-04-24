@@ -16,15 +16,14 @@ class Form extends React.Component {
   send() {
     this.setState(
       { done: true },
-      this.handleForm,
+      this.handleForm.bind(this),
     )
   }
 
   handleForm() {
-    setTimeout(function() {
+    setTimeout(() => {
       const { name, text } = this.state
       console.log(name, text)
-
       this.setState({ done: false })
     }, 1000)
   }
