@@ -21,11 +21,12 @@ class Reader extends React.Component {
     );
   }
 
-  turnThePage() {
+  turnThePage(step) {
     const total = this.state.pages.length;
-    
-    this.setState({ currentPage: total})
-    console.log(this.state.pages)
+    const stepPage = this.state.currentPage + step;
+    if ( stepPage < total && stepPage > 0 ) {
+      this.setState({ currentPage: stepPage})
+    }
   }
 }
 
